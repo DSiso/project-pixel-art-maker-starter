@@ -1,32 +1,33 @@
 // Select color input
 // Select size input
-var height, width, color;
+let colorPicker = document.getElementsById('colorPicker').val;
+let gridHeight  = document.getElementsById("inputHeight").val;
+let gridWidth = document.getElementById("inputWidth").val;
+let table = document.getElementById("pixelCanvas").val;
+let form = document.getElementById("sizePicker").val;
+
 
 // When size is submitted by the user, call makeGrid()
-$( "#sizePicker" ).submit(function( event ) {
-     event.preventDefault();
-     height =$('#inputHeight').val();
-     width =$('#inputWidth').val();
-     makeGrid(height, width);
-     //console.log('Height: ' + height + ' and width: ' + width);
+form.addaeventListener('submit', function(e) {
+    e.preventDefault();
+    makeGrid();
+});
+
+table.addaeventListener('click', function(e) {
+    if (e.target.nodeName === 'TD') {
+        e.target.style.backgroundColor = colorPicker.value;
+    }
 })
 
 
-function makeGrid(x, y) {
-    $('tr').remove();
+function makeGrid() {
+for (let i = 0; i < gridHeight.value; i++) {
+    let row = pixelCanvas.insertRow(0);
+    for (let j = 0; j < gridWidth.value; j++) {
 
-        }
     }
-
-    //add color to cell
-    $('td').click(function addColor() {
-        color = $('#colorPicker').val();
-
-        if ($(this).attr('style')) {
-            $(this).removeAttr('style')
-        } else {
-            $(this).attr('style', 'background-color:' + color);
-        }
-        
-    })
 }
+
+    // Your code goes here!
+   
+    
