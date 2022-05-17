@@ -1,33 +1,34 @@
 // Select color input
 // Select size input
-let colorPicker = document.getElementsById('colorPicker').val;
-let gridHeight  = document.getElementsById("inputHeight").val;
-let gridWidth = document.getElementById("inputWidth").val;
-let table = document.getElementById("pixelCanvas").val;
-let form = document.getElementById("sizePicker").val;
+let canvas = document.getElementById("pixelCanvas");
+let color = document.getElementById("colorPicker");
+let sizePicker = document.getElementById("sizePicker");
+let height = document.getElementById("inputHeight");
+let width = document.getElementById("inputWidth");
 
 
-// When size is submitted by the user, call makeGrid()
-form.addaeventListener('submit', function(e) {
-    e.preventDefault();
-    makeGrid();
-});
-
-table.addaeventListener('click', function(e) {
-    if (e.target.nodeName === 'TD') {
-        e.target.style.backgroundColor = colorPicker.value;
-    }
-})
-
-
-function makeGrid() {
-for (let i = 0; i < gridHeight.value; i++) {
-    let row = pixelCanvas.insertRow(0);
-    for (let j = 0; j < gridWidth.value; j++) {
-
+//function to create grid and assign event listeners to all cells on creation
+function makeGrid(height, width) {
+    for (let i = 0; i < height; i++) {
+        let row = canvas.insertRow(i);
+        for (let j = 0; j < width; j++) {
+            let cell = row.insertCell(j);
+            cell.addEventListener("mousedown", function(evt) {
+                cell.style.backgroundColor = color.value;
+            cell.addEventListener("contextmenu", function(evt) {
+                evt.preventDefault();
+                cell.style.backgroundColor = "white";
+            } )
+            } )
+        }
     }
 }
 
-    // Your code goes here!
-   
-    
+sizePicker.addEventListener("submit", function(evt) {
+    evt.preventDefault();
+    while (canvas.hasChildNodes()) {
+        canvas.removeChild(canvas.lastChild);
+    }
+    makeGrid(height.value, width.value);
+});
+
